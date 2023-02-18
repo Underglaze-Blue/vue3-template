@@ -8,6 +8,7 @@ module.exports = {
       [
         'feat', // 新功能
         'fix', //  修复
+        'config', // 项目配置变更
         'docs', // 文档变更
         'style', // 代码格式（不影响代码运行的变动）
         'refactor', // 重构（既不是增加feature）,也不是修复bug
