@@ -3,7 +3,7 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
-  plugins: ['prettier'],
+  plugins: ['prettier', 'import'],
   settings: {
     'import/resolver': {
       typescript: {},
@@ -14,6 +14,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },
     },
+    'import/ignore': ['uno.css'],
   },
   extends: [
     'plugin:vue/vue3-essential',
@@ -43,6 +44,10 @@ module.exports = {
     ],
     'import/prefer-default-export': ['off'], // 默认只有一个方法时，导出需要 default，关闭
     'no-plusplus': ['off'],
+    'import/named': 2, // 添加这个
+    'import/namespace': 2, // 添加这个
+    'import/default': 2, // 添加这个
+    'import/export': 2, // 添加这个
     quotes: ['error', 'single'], // 单引号
   },
 };

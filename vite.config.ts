@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { fileURLToPath, URL } from 'node:url';
 
 import { defineConfig } from 'vite';
@@ -6,6 +7,9 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+
+import UnoCSS from '@unocss/vite';
+import { presetAttributify, presetUno } from 'unocss';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -17,6 +21,9 @@ export default defineConfig({
     }),
     Components({
       resolvers: [ElementPlusResolver()],
+    }),
+    UnoCSS({
+      presets: [presetAttributify(), presetUno()],
     }),
   ],
   resolve: {
