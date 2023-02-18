@@ -42,6 +42,6 @@ module.exports = {
       },
     ],
     "import/prefer-default-export": ["off"], // 默认只有一个方法时，导出需要 default，关闭
-    "no-plusplus": ['off']
+    "no-plusplus": ["off"],
   },
 };
