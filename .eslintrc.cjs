@@ -43,6 +43,6 @@ module.exports = {
     ],
     "import/prefer-default-export": ["off"], // 默认只有一个方法时，导出需要 default，关闭
     "no-plusplus": ["off"],
-    'quotes': ["error", "double"] // 单引号
+    "quotes": ["error", "single"], // 单引号
   },
 };
