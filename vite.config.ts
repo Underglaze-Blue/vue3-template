@@ -10,7 +10,6 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 import UnoCSS from '@unocss/vite';
 import { presetAttributify, presetUno } from 'unocss';
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [

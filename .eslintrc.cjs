@@ -19,10 +19,10 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
-    '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier',
     'airbnb-base',
     'plugin:prettier/recommended',
+    '@vue/eslint-config-typescript',
+    '@vue/eslint-config-prettier',
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -47,7 +47,11 @@ module.exports = {
     'import/named': 2, // 添加这个
     'import/namespace': 2, // 添加这个
     'import/default': 2, // 添加这个
-    'import/export': 2, // 添加这个
+    'import/export': 2, // 添加这个s
+    'no-param-reassign': ['off'],
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    'no-shadow': 'off',
     quotes: ['error', 'single'], // 单引号
   },
 };
