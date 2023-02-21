@@ -51,8 +51,8 @@ module.exports = {
     scope: '\n选择一个 scope（可选）：',
     // 选择 scope: custom 时会出下面的提示
     customScope: '请输入自定义的 scope：',
-    subject: '填写简短精炼的变更描述：\n',
-    body: '填写更加详细的变更描述（可选）。使用 "|" 换行：\n',
+    subject: '变更描述(必填)：\n',
+    body: '详细的变更描述（可选）。使用 "|" 换行：\n',
     breaking: '列举非兼容性重大的变更（可选）：\n',
     footer: '列举出所有变更的 ISSUES CLOSED（可选）。 例如: #31, #34：\n',
     confirmCommit: '确认提交？'
