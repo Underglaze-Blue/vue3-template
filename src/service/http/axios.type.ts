@@ -6,7 +6,7 @@ import type {
 } from 'axios';
 
 export interface RequestInterceptors<T> {
-  // 请求拦截s
+  // 请求拦截
   requestInterceptors?: (
     config: InternalAxiosRequestConfig
   ) => InternalAxiosRequestConfig;
@@ -31,10 +31,14 @@ export interface RequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
 export type IAbortController = Map<string, () => void>;
 
 // url 转换为 map key
-export interface ITransformUrl {
-  (config: keyof RequestConfig): string;
-}
+export type ITransformUrl = string;
 
 export interface IRemovePendingUrl {
   (str: string, map: IAbortController): void;
+}
+
+export interface BaseData {
+  data: any;
+  message: string;
+  code: number;
 }

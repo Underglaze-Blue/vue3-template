@@ -1,7 +1,5 @@
 import type { AxiosResponse } from 'axios';
-import Request from './axios.config';
-
-import type { RequestConfig } from './axios.type';
+import Request from '../http/axios.config';
 
 const request = new Request({
   baseURL: import.meta.env.BASE_URL,
@@ -13,6 +11,7 @@ const request = new Request({
     responseInterceptors: (result: AxiosResponse) => {
       return result;
     },
+    responseInterceptorsCatch(err) {},
   },
 });
 
