@@ -36,9 +36,3 @@ export type ITransformUrl = string;
 export interface IRemovePendingUrl {
   (str: string, map: IAbortController): void;
 }
-
-export interface BaseData {
-  data: any;
-  message: string;
-  code: number;
-}

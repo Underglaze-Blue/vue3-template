@@ -5,6 +5,7 @@ import type {
   InternalAxiosRequestConfig,
   CancelTokenStatic,
 } from 'axios';
+import { ElMessage } from 'element-plus';
 import type {
   RequestConfig,
   RequestInterceptors,
@@ -14,6 +15,8 @@ import type {
 } from './axios.type';
 
 import { transformUrl, removePendingUrl } from './axios.utils';
+
+import { token, schoolId, simpleDataFn } from '../request/http.utils';
 
 // 接口前缀
 // const BASE_URL = '';
@@ -56,15 +59,41 @@ class Request {
     this.instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
         // config.params = Object.assign()
+        config.params = {
+          token: token.value,
+          shcoolId: schoolId.value,
+          ...config.params,
+        };
+        config.headers.set('Blade-Auth', token.value);
         return config;
       }
     );
     this.instance.interceptors.response.use(
       // 因为我们接口的数据都在 res.data 下，所以我们直接返回 res.data
       (res: AxiosResponse) => {
-        return res.data;
+        const SimpleData = simpleDataFn(res).data;
+        ElMessage({
+          type: 'success',
+          message: 'success',
+        });
+        if (SimpleData.code !== 200 || !SimpleData.success) {
+          ElMessage({
+            type: 'error',
+            message: SimpleData.message,
+          });
+          return null;
+        }
+        return SimpleData;
       },
-      (err: any) => err
+      (err: any) => {
+        if (err.message !== 'canceled') {
+          ElMessage({
+            type: 'error',
+            message: err.message,
+          });
+        }
+        return err;
+      }
     );
   }
 

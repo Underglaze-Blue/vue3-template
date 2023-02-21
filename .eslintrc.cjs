@@ -53,5 +53,13 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     'no-shadow': 'off',
     quotes: ['error', 'single'], // 单引号
+    'no-unused-expressions': [
+      'error',
+      {
+        allowShortCircuit: true,
+        allowTernary: true,
+        allowTaggedTemplates: true,
+      },
+    ],
   },
 };
