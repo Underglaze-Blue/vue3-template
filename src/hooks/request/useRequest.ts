@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue';
+import { ref, computed, shallowRef } from 'vue';
 import { delay, debounce, throttle } from 'lodash-es';
 // 引入返回值类型
 import type { SimpleData } from '@/service/request/http.type';
@@ -20,19 +20,19 @@ const defaultOption: IUseRequestOption = {
   onFinish: undefined,
 };
 const useRequest = <
-  ParamType = any,
-  PromiseRequestType = any,
-  DataType = SimpleData<PromiseRequestType>
+  ParamType = any, // 参数的类型
+  ResponseType = any, //  返回的data的类型
+  DataType = SimpleData<ResponseType> //  返回的data的类型的外层
 >(
-  PromiseRequest: (p: ParamType) => Promise<DataType>,
-  params: ParamType,
-  opt?: IUseRequestOption<DataType>
+  PromiseRequest: (p: ParamType) => Promise<DataType>, // 异步请求函数
+  params: ParamType, // 参数
+  opt?: IUseRequestOption<DataType> // 配置项
 ): IUseRequestRequest<ParamType, DataType> => {
   type Params = ParamType;
   // 合并配置项
   const option = { ...defaultOption, ...opt };
   const loading = ref(false);
-  const data = ref<DataType>();
+  const data = shallowRef<DataType>();
   // 警告
   if (option.throttle && option.debounce) {
     console.warn(

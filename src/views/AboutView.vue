@@ -1,34 +1,18 @@
 <template>
-  <div class="about">
+  <div class="about" flex-col align-center justify-center>
     <h1>This is an about page</h1>
+    <h1>{{ data?.data[1] }}</h1>
     <el-button @click="test">333</el-button>
   </div>
 </template>
 
 <script setup lang="ts">
-import Api from '@/service/request';
+import Test from '@/api/test';
+import useRequest from '@/hooks/useRequest';
 
-interface RequsetType {
-  recipeId: string;
-  weekDay: number;
-  token: string;
-  schoolId: number;
-}
-
+const { data } = useRequest(Test.testRequest, {});
 function test() {
-  Api.http
-    .postFormData<RequsetType>(
-      'https://testsaas.imeduplus.com/gateway/dietcare/saas/diet/evaluation/getEvaluations',
-      {
-        recipeId: 180777,
-        weekDay: 1,
-        token: '5214fde8-ef6a-4048-b337-95340f09e9d6',
-        schoolId: 6101130670,
-      }
-    )
-    .then((res) => {
-      console.log(res);
-    });
+  console.log(data.value);
 }
 </script>
 

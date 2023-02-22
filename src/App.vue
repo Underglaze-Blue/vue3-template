@@ -22,6 +22,14 @@ import HelloWorld from './components/HelloWorld.vue';
       </nav>
     </div>
     <div bg-red-300 b-rd-3 w-100 h-100 flex="grow-0 shrink-0 basis-100"></div>
+    <div
+      bg-green-400
+      b-rd-3
+      w-100
+      h-100
+      ml-20
+      flex="grow-0 shrink-0 basis-100"
+    ></div>
   </header>
 
   <RouterView />
