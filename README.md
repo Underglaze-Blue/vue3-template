@@ -322,3 +322,9 @@ export default defineConfig({
   },
 })
 ```
+
+## 其他说明
+
+- `.cz-config.js` -- `git` 提交校验的自定义配置文件
+- `commitlint.config.js` -- `git` 钩子校验
+- `.prettierrc.json` -- `pretter` 格式化规则
