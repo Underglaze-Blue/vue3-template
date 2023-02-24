@@ -7,6 +7,11 @@ export const useCounterStore = defineStore('counter', () => {
   function increment() {
     count.value++;
   }
+  function incrementSync() {
+    setTimeout(() => {
+      count.value++;
+    }, 1000);
+  }
 
-  return { count, doubleCount, increment };
+  return { count, doubleCount, increment, incrementSync };
 });

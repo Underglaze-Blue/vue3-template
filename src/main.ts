@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved, import/no-extraneous-dependencies, import/no-duplicates, import/no-self-import, import/no-relative-packages */
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 import App from './App.vue';
 import router from './router';
@@ -11,9 +12,12 @@ import 'element-plus/es/components/message/style/css';
 import './assets/main.css';
 import 'uno.css';
 
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
+
 const app = createApp(App);
 
-app.use(createPinia());
+app.use(pinia);
 app.use(router);
 
 app.mount('#app');

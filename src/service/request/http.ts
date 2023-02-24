@@ -1,13 +1,13 @@
 import Request from '../http/axios.config';
-import type { SimpleData } from './http.type';
+import type { NormalizeData } from './http.type';
 
 const requestAxios = new Request({
-  baseURL: import.meta.env.BASE_URL,
+  baseURL: import.meta.env.DEV ? '/api' : import.meta.env.BASE_URL,
   timeout: 1000 * 60 * 5,
 });
 
 class Instance {
-  static get<T>(url: string, params: object = {}): Promise<SimpleData<T>> {
+  static get<T>(url: string, params: object = {}): Promise<NormalizeData<T>> {
     return requestAxios.request({
       url,
       params,
@@ -15,7 +15,7 @@ class Instance {
     });
   }
 
-  static post<T>(url: string, params: object = {}): Promise<SimpleData<T>> {
+  static post<T>(url: string, params: object = {}): Promise<NormalizeData<T>> {
     return requestAxios.request({
       url,
       params,
@@ -27,7 +27,7 @@ class Instance {
     url: string,
     params: object = {},
     data: object = {}
-  ): Promise<SimpleData<T>> {
+  ): Promise<NormalizeData<T>> {
     return requestAxios.request({
       url,
       params,

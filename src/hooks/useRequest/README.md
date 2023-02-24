@@ -13,27 +13,6 @@
 * 突变
 * loading delay
 
-## 请求方式
-如果service是object,useRequest会使用 Fetch 来发送网络请求
-```
-const { data } = useRequest(
-    {
-    url: 'http://xxx.xx.com/api/userInfo',
-    method: 'POST'
-    }
-);
-```
-如果service是async函数,useRequest会调用此函数来发送网络请求
-```
-const { data } = useRequest(
-    () => {
-        return axios.post(
-            `http://xxx.xx.com/api/userInfo`
-        );
-    },
-);
-```
-
 ## 使用
 ### 默认请求
 ```
@@ -175,24 +154,6 @@ const { data, loading } = useRequest(
 同一个 cacheKey 的请求，是全局共享的，也就是你可以提前请求数据。后续请求会提前返回之前预加载的数据，利用该特性，可以很方便的实现预加载。
 
 
-### 屏幕聚焦重新请求
-
-```
-const { data, loading } = useRequest(
-    () => {
-        return axios.post(
-            `http://xxx.xx.com/api/userInfo`
-        );
-    },
-    {
-        refreshOnWindowFocus: true,
-        focusTimespan: 2000
-    }
-);
-```
-
-如果你设置了 options.refreshOnWindowFocus = true ，则在浏览器窗口 refocus 和 revisible 时，会重新发起请求。你可以通过设置 options.focusTimespan 来设置请求间隔，默认无 。
-
 ### 突变
 
 ```
@@ -273,7 +234,6 @@ setInterval(()=>{
 | 参数 | 说明 | 类型 | 默认值 |
 | :----| :---- | :---- | :---- |
 | manual | 是否需要手动执行 | boolean | false |
-| defaultParams | 如果 manual=false ，自动执行 run 的时候，默认带上的参数 | any[] | - |
 | refreshDeps | 在 manual = false 时，refreshDeps 变化，会触发 service 重新执行 | any[] | [] |
 | loadingDelay | 设置显示 loading 的延迟时间，避免闪烁 | number | - |
 | pollingInterval | 轮询间隔，单位为毫秒。设置后，将进入轮询模式，定时触发 run | number | - |

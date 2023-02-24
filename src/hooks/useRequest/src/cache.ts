@@ -1,8 +1,8 @@
-import type MemoryCache from '@/utils/memoryCache';
+import type { IMemoryCache } from '@/utils/memoryCache';
 
 const handleResCache = (
   data: any,
-  resCache: MemoryCache,
+  resCache: IMemoryCache,
   cacheKey?: string,
   cacheTime?: number
 ) => {

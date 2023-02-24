@@ -1,7 +1,7 @@
 import { shallowRef, ref, watch } from 'vue';
 import { debounce, throttle } from 'lodash-es';
 import MemoryCache from '@/utils/memoryCache';
-import type { SimpleData } from '@/service/request/http.type';
+import type { NormalizeData } from '@/service/request/http.type';
 import type {
   BaseOptions,
   Result,
@@ -27,7 +27,6 @@ const defaultOptions = {
   onSuccess: () => {},
   onError: () => {},
   formatResult: (data: any) => data,
-  defaultParams: [],
   pollingInterval: 0,
   pollingWhenHidden: true,
   ready: undefined,
@@ -43,12 +42,11 @@ const defaultOptions = {
 const argsSymbolKey = 'argsKey';
 
 const useRequest = <
-  ParamType = any, // 参数的类型
   ResponseType = any, //  返回的data的类型
-  DataType = SimpleData<ResponseType> //  返回的data的类型的外层
+  DataType = NormalizeData<ResponseType> //  返回的data的类型的外层
 >(
-  PromiseRequest: (p?: ParamType) => Promise<DataType>, // 异步请求函数
-  params?: ParamType, // 参数
+  PromiseRequest: (...args: any[]) => Promise<DataType>, // 异步请求函数
+  params?: any | any[], // 参数
   options?: BaseOptions
 ) => {
   const {
@@ -57,7 +55,6 @@ const useRequest = <
     onSuccess,
     onError,
     formatResult,
-    defaultParams,
     pollingInterval,
     pollingWhenHidden,
     ready,
@@ -70,7 +67,7 @@ const useRequest = <
     staleTime,
   } = { ...defaultOptions, ...options };
 
-  const data = shallowRef<DataType | undefined>(initialData);
+  const data = shallowRef<DataType>(initialData);
   const error = ref<Error | undefined>(undefined);
   const loading = ref(false);
   const latestTime = ref<number>(0);
@@ -101,9 +98,10 @@ const useRequest = <
     latestTime.value = reqTime;
 
     params && reqCache.put(argsSymbolKey, args);
+    const tempParasm = Array.isArray(args[0]) ? [...args[0]] : [...args];
 
     // 调用请求方法
-    PromiseRequest(params)
+    PromiseRequest(...tempParasm)
       .then((res) => {
         clearLoadingDelayTimer();
         res = formatResult(res);
@@ -144,7 +142,7 @@ const useRequest = <
   // 是否自动执行
   if (!manual && ready === undefined) {
     // 是否携带默认参数
-    defaultParams.length > 0 ? run(...defaultParams) : run();
+    run(params);
 
     // 是否执行轮询
     pollingRun();

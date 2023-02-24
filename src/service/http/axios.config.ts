@@ -16,7 +16,7 @@ import type {
 
 import { transformUrl, removePendingUrl } from './axios.utils';
 
-import { token, schoolId, simpleDataFn } from '../request/http.utils';
+import { token, schoolId, normalizeDataFn } from '../request/http.utils';
 
 // 接口前缀
 // const BASE_URL = '';
@@ -71,19 +71,19 @@ class Request {
     this.instance.interceptors.response.use(
       // 因为我们接口的数据都在 res.data 下，所以我们直接返回 res.data
       (res: AxiosResponse) => {
-        const SimpleData = simpleDataFn(res).data;
+        const NormalizeData = normalizeDataFn(res).data;
         ElMessage({
           type: 'success',
           message: 'success',
         });
-        if (SimpleData.code !== 200 || !SimpleData.success) {
+        if (NormalizeData.code !== 200 || !NormalizeData.success) {
           ElMessage({
             type: 'error',
-            message: SimpleData.message,
+            message: NormalizeData.message,
           });
           return null;
         }
-        return SimpleData;
+        return NormalizeData;
       },
       (err: any) => {
         if (err.message !== 'canceled') {

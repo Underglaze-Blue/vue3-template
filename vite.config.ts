@@ -10,6 +10,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 import UnoCSS from '@unocss/vite';
 import { presetAttributify, presetUno } from 'unocss';
+import presetRemToPx from '@unocss/preset-rem-to-px';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -19,15 +20,39 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: 'sass',
+        }),
+      ],
     }),
     UnoCSS({
-      presets: [presetAttributify(), presetUno()],
+      presets: [
+        presetAttributify(),
+        presetUno(),
+        presetRemToPx({ baseFontSize: 4 }),
+      ],
     }),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@use "@/assets/styles/element/index.scss" as *;',
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://testsaas.imeduplus.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
     },
   },
 });

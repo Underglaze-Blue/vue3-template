@@ -1,6 +1,6 @@
 import { useStorage } from '@vueuse/core';
 import type { AxiosResponse } from 'axios';
-import type { SimpleData } from './http.type';
+import type { NormalizeData } from './http.type';
 
 const token = useStorage('token', null, sessionStorage);
 const schoolId = useStorage('schoolId', null, sessionStorage);
@@ -15,7 +15,7 @@ const transformCode = (afterCode: number | string): number => {
   return afterCode;
 };
 // 中间件，用来处理不同的返回数据类型，返回成为统一的结构体
-const simpleDataFn = (res: AxiosResponse): AxiosResponse => {
+const normalizeDataFn = (res: AxiosResponse): AxiosResponse => {
   if (Object.prototype.hasOwnProperty.call(res.data, 'rtnCode')) {
     res.data = {
       data: res.data.bizData || {},
@@ -34,4 +34,4 @@ const simpleDataFn = (res: AxiosResponse): AxiosResponse => {
   return res;
 };
 
-export { token, schoolId, simpleDataFn };
+export { token, schoolId, normalizeDataFn };

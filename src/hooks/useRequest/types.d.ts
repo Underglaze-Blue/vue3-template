@@ -1,5 +1,5 @@
 import { Ref } from 'vue';
-import type { SimpleData } from '@/service/request/http.type';
+import type { NormalizeData } from '@/service/request/http.type';
 
 // Service请求实例
 export type Service = (...args: any[]) => Promise<any>;
@@ -13,7 +13,6 @@ export interface BaseOptions {
   formatResult?: (response: any) => any; // 格式化请求结果
   onSuccess?: (data: any, params: any[]) => void; // 成功回调
   onError?: (error: Error, params: any[]) => void; // 失败回调
-  defaultParams?: any[]; // 如果 manual=false ，自动执行 run 的时候，默认带上的参数
   pollingInterval?: number; // 轮询请求时间
   pollingWhenHidden?: boolean; // 在屏幕不可见时，暂时暂停定时任务。
   ready?: undefined | Ref<boolean>; // 依赖请求
@@ -40,7 +39,7 @@ export type Mutate = (state: any) => void;
 
 // hook返回值
 export interface Result<T> {
-  data: Ref<T | undefined>; // 是否需要手动触发
+  data: Ref<T>; // 是否需要手动触发
   loading: Ref<boolean>;
   run: Run;
   refresh: Refresh;

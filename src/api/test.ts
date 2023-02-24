@@ -1,5 +1,5 @@
 import Api from '@/service/request';
-import type { SimpleData } from '@/service/request/http.type';
+import type { NormalizeData } from '@/service/request/http.type';
 
 interface TestType {}
 interface SuccessType {
@@ -13,7 +13,7 @@ interface SuccessType {
 }
 
 export default class Test {
-  static testRequest(params?: TestType): Promise<SimpleData<SuccessType[]>> {
+  static testRequest(params?: TestType): Promise<NormalizeData<SuccessType[]>> {
     return Api.http.get<SuccessType[]>('/test/', params);
   }
 }
