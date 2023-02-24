@@ -86,6 +86,7 @@ Vue3 + ts + vite + router + Pinia + eslint + husky + element-plus + echarts + sa
 `UnoCSS`:  https://uno.antfu.me/
 
 `element-plus`: https://element-plus.gitee.io/zh-CN/
+
 `pinia-plugin-persistedstate`: https://prazdevs.github.io/pinia-plugin-persistedstate/zh/guide/config.html   持久化数据
 
 
