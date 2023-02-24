@@ -48,34 +48,27 @@ npm run lint
 # 技术选型
 
 
+[`ts`](https://github.com/microsoft/TypeScript) : 类型检查
 
-Vue3 + ts + vite + router + Pinia + eslint + husky + element-plus + echarts + sass + axios + UnoCSS + vueUse
+[`vite`](https://github.com/vitejs/vite) : 构建工具
 
+[`router`](https://github.com/vuejs/router): 路由
 
+[`pinia`](https://github.com/vuejs/pinia) : 状态管理
 
-`ts` : 类型检查
+[`eslint`](https://github.com/eslint/eslint): 代码规范校验
 
-`vite` : 构建工具
+[`husky`](https://github.com/typicode/husky): git提交钩子
 
-`router`: 路由
+[`element-plus`](https://github.com/element-plus/element-plus): UI框架
 
-`pinia` : 状态管理
+[`sass`](https://github.com/sass/sass): css 预处理器
 
-`eslint`: 代码规范校验
+[`axios`](https://github.com/axios/axios): http请求
 
-`husky`: git提交钩子
+[`UnoCSS`](https://github.com/unocss/unocss): 原子化 css
 
-`element-plus`: UI框架
-
-`sass`: css 预处理器
-
-`echarts`:   Apache 图表库
-
-`axios`: http请求
-
-`UnoCSS`: 原子化 css
-
-`vueUse`: hooks 库
+[`vueUse`](https://github.com/vueuse/vueuse): hooks 库
 
 
 
@@ -141,6 +134,22 @@ import 'uno.css';
 
 会生成两个 `div` 块，宽高都是 100（`w-100 h-100`）， 圆角为 3px （`b-rd-3`），`bg-red-300` 和 `bg-green-400` 为背景色，可以通过 https://uno.antfu.me/?s=color 查看颜色呈现效果
 
+
+除设置 `html` `font-size` 的方法外， `UnoCSS` 提供了插件 `@unocss/preset-rem-to-px`，可以将 `rem` 转为 `px`
+```ts
+// vite.config
+import presetRemToPx from '@unocss/preset-rem-to-px';
+
+// ...
+UnoCSS({
+  presets: [
+    presetAttributify(),
+    presetUno(),
+    presetRemToPx({ baseFontSize: 4 }),
+  ],
+}),
+// ...
+```
 
 
 ## vueUse
